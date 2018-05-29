@@ -23,7 +23,7 @@ $ ./image_to_ascii.py --help
 To show a bit stream in the terminal out of which an ASCII image
 materializes:
 ```bash
-$ ./materialize.py bug.txt
+$ ./materialize.py AsciiImages/bug.txt
 ```
 To get help on command line options to fine-tune:
 ```bash
