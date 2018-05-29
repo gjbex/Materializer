@@ -29,3 +29,9 @@ To get help on command line options to fine-tune:
 ```bash
 $ ./materialize.py --help
 ```
+
+## Requirements
+
+  * Python 3.6+
+  * scikit-image
+  * numpy
