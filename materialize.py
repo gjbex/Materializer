@@ -39,13 +39,15 @@ def main(stdscr, options):
     pict = read_picture(options.picture)
     lines = len(pict)
     if lines == 0 or lines >= curses.LINES:
-        print('### error: picture lines {lines} is invalid',
-              file=sys.stdeer)
+        curses.endwin()
+        print(f'### error: picture lines {lines} is invalid, enlarge your terminal',
+              file=sys.stderr)
         sys.exit(1)
     cols = len(pict[0])
     if cols == 0 or cols >= curses.COLS:
-        print('### error: picture columns {cols} is invalid',
-              file=sys.stdeer)
+        curses.endwin()
+        print(f'### error: picture columns {cols} is invalid, enlarge your terminal',
+              file=sys.stderr)
         sys.exit(1)
     stdscr.border(' ')
     for line_nr in range(lines):
