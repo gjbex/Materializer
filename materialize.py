@@ -6,6 +6,17 @@ import random
 import sys
 import time
 
+COLORS = {
+    'black':   curses.COLOR_BLACK,
+    'white':   curses.COLOR_WHITE,
+    'red':     curses.COLOR_RED,
+    'green':   curses.COLOR_GREEN,
+    'blue':    curses.COLOR_BLUE,
+    'magenta': curses.COLOR_MAGENTA,
+    'yellow':  curses.COLOR_YELLOW,
+    'cyan':    curses.COLOR_CYAN,
+}
+
 def new_line(cols, started_cols, prob=0.5):
     population = ['0', '1']
     weights = [1.0 - prob, prob]
@@ -26,12 +37,9 @@ def update_started_cols(started_cols, prob):
             started_cols[col_nr] = started_cols[col_nr] or True
     
 def main(stdscr, options):
-    if options.bg_color == 'white':
-        bg_color = curses.COLOR_WHITE
-    else:
-        bg_color = curses.COLOR_BLACK
-    curses.init_pair(1, curses.COLOR_GREEN, bg_color)
-    curses.init_pair(2, curses.COLOR_RED, bg_color)
+    bg_color = COLORS[options.bg_color]
+    curses.init_pair(1, COLORS[options.fg_color1], bg_color)
+    curses.init_pair(2, COLORS[options.fg_color2], bg_color)
     figure_char = '0'
     stdscr.clear()
     stdscr.refresh()
@@ -101,8 +109,12 @@ if __name__ == '__main__':
                             help='probability for showing 1')
     arg_parser.add_argument('--ragged-prob', type=float, default=0.1,
                             help='probability for starting a column')
-    arg_parser.add_argument('--bg-color', choices=['black', 'white'],
+    arg_parser.add_argument('--bg-color', choices=COLORS.keys(),
                             default='black', help='background color')
+    arg_parser.add_argument('--fg-color1', choices=COLORS.keys(),
+                            default='green', help='first foreground color')
+    arg_parser.add_argument('--fg-color2', choices=COLORS.keys(),
+                            default='red', help='second foreground color')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='verbose output for debugging')
     options = arg_parser.parse_args()
