@@ -7,7 +7,7 @@ import skimage.io
 
 def image_to_ascii(image, lines, cols, threshold):
     img_data = skimage.io.imread(image)
-    pixel_data = img_data.mean(axis=2)
+    pixel_data = img_data.mean(axis=2) if img_data.ndim == 3 else img_data
     ascii = np.empty((lines, cols), dtype=np.int)
     height = pixel_data.shape[0]//lines
     width = pixel_data.shape[1]//cols
