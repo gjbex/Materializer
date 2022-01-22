@@ -1,0 +1,9 @@
+name: materializer
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - scikit-image
+  - wordcloud
+  - jupyterlab
+prefix: /home/gjb/miniconda3/envs/materializer
