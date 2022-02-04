@@ -18,10 +18,10 @@ def image_to_ascii(image, lines, cols, threshold):
             ascii[line_nr, col_nr] = 1 if pixel < threshold else 0
     return ascii
 
-def write_image(image):
+def write_image(image, sep=''):
     for line_nr in range(image.shape[0]):
         for col_nr in range(image.shape[1]):
-            print(image[line_nr, col_nr], end='')
+            print(f'{image[line_nr, col_nr]}{sep}', end='')
         print()
 
 if __name__ == '__main__':
@@ -34,7 +34,9 @@ if __name__ == '__main__':
     arg_parser.add_argument('--threshold', type=float, default=0.7,
                             help=('threshold above which pixel is '
                                   'considered as white'))
+    arg_parser.add_argument('--sep', default='',
+                            help='string to separate columns in output')
     options = arg_parser.parse_args()
     ascii = image_to_ascii(options.image, options.lines, options.cols,
                            options.threshold)
-    write_image(ascii)
+    write_image(ascii, options.sep)
